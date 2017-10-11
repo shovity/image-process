@@ -1,0 +1,81 @@
+extends master
+block body
+  input#inpFile.hidden(type="file")
+  #navbar
+    ul.menu
+      li File
+      li Edit
+      li Image
+      li Help
+      li Abouts
+  #previewBox
+    .top-bar
+      | Preview 
+      span#iname
+    #preview
+      #previewOrigin
+        label#dragZone(for='inpFile')
+          img(src="/images/temp.png" id="imagePreviewOrigin")
+      #previewResult
+        img(src="/images/temp.png" id="imagePreviewResult")
+      #arrow
+        span.glyphicon.glyphicon-chevron-right
+  
+  #info
+    .top-bar Infomations
+    .after
+      h5
+        b Trước thay đổi
+      p
+        | Kích thước: 
+        span#infoOSize 123x456 (defualt value)
+      p
+        | Dung lượng: 
+        span#infoOLength 123kb (defualt value)
+      p
+        | Định dạng: 
+        span#infoOMine image/png (default value)
+      p Histogram:
+      .his
+        img#hisO
+    .befor
+      h5
+        b Sau thay đổi
+      p
+        | Kích thước: 
+        span#infoNSize 123x456 (defualt value)
+      p
+        | Dung lượng: 
+        span#infoNLength 123kb (defualt value)
+      p
+        | Định dạng: 
+        span#infoNMine image/png (default value)
+      p Histogram:
+      .his
+        img#hisN
+    
+  #controls
+    .top-bar
+      ul.menu
+        li#menui0.active histogram
+        li#menui1 lam xam
+        li#menui2 Lọc nhiễu
+        li#menui3 tuong phan
+        li#menui4 Độ sáng
+        li#menui5 Test
+    #mcontent0.active c0
+    #mcontent1 c1
+    #mcontent2
+      h5 Lọc nhiễu trung vị
+      .lab Kích thước mặt nạ:
+      input#m2p0
+      br
+      .lab Hệ số δ:
+      input#m2p1
+    #mcontent3
+    #mcontent4
+      h5 Thay đổi độ sáng
+      .lab Giá trị thay đổi:
+      input#m4p0
+    #mcontent5
+      h5 Test
