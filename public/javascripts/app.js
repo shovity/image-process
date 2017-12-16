@@ -48,6 +48,14 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log('click arrow, mactive = ' + mactive);
 
     switch (mactive) {
+      case 'menui0':
+        // Gian histogram
+        console.log('send request gian histogram');
+        requestProcess('gianhis', [m0p0.value, m0p1.value], imagePreviewResult, false, (err) => {
+          requestProcess('histogram', [],  hisN, true)
+        })
+        break;
+
       case 'menui2':
         // Loc nhieu
         console.log('send request loc nhieu');
@@ -72,6 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         break;
       default:
+        console.log('Case not found!');
 
     }
 

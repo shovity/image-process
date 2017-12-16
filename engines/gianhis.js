@@ -6,8 +6,9 @@
  */
 function gianhs(image, params) {
   console.log('Gian histogram....')
-
-  const [lmax = 50, lmin = 200] = params
+  params[0] = +params[0]
+  params[1] = +params[1]
+  const [lmax = 255, lmin = 0] = params
 
   let min = 255;
   let max = 0;

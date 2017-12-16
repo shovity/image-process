@@ -1,6 +1,7 @@
 const express = require('express')
 const ip = require('../ip')
 
+const gianhis = require('../engines/gianhis')
 const grayscale = require('../engines/grayscale')
 const histogram = require('../engines/histogram')
 const locnhieu = require('../engines/locnhieu')
@@ -10,6 +11,7 @@ const test = require('../engines/test')
 const api = express.Router()
 
 const GRAYSCALE = 'grayscale'
+const GIANHIS = 'gianhis'
 const HISTOGRAM = 'histogram'
 const LOCNHIEU = 'locnhieu'
 const DOSANG = 'dosang'
@@ -37,6 +39,15 @@ api.route('/image')
     const [ , mine, imageBase64] = dataBase64.match(/data:(.+);base64,(.+)/)
 
     switch (cmd) {
+      case GIANHIS:
+        ip.readBase64(imageBase64, image => {
+          gianhis(image, params)
+          image.jimp.getBase64(mine, (err, result) => {
+            res.json({ imageBase64Url: result })
+          })
+        })
+        break
+
       case GRAYSCALE:
         ip.readBase64(imageBase64, image => {
           grayscale(image)
@@ -46,41 +57,41 @@ api.route('/image')
         })
         break
 
-        case HISTOGRAM:
+      case HISTOGRAM:
+        ip.readBase64(imageBase64, image => {
+          histogram(image)
+          image.jimp.getBase64(mine, (err, result) => {
+            res.json({ imageBase64Url: result })
+          })
+        })
+        break
+
+      case LOCNHIEU:
+        ip.readBase64(imageBase64, image => {
+          locnhieu(image, params)
+          image.jimp.getBase64(mine, (err, result) => {
+            res.json({ imageBase64Url: result })
+          })
+        })
+        break
+
+      case DOSANG:
+        ip.readBase64(imageBase64, image => {
+          dosang(image, params)
+          image.jimp.getBase64(mine, (err, result) => {
+            res.json({ imageBase64Url: result })
+          })
+        })
+        break
+
+        case TEST:
           ip.readBase64(imageBase64, image => {
-            histogram(image)
+            test(image, params)
             image.jimp.getBase64(mine, (err, result) => {
               res.json({ imageBase64Url: result })
             })
           })
           break
-
-        case LOCNHIEU:
-          ip.readBase64(imageBase64, image => {
-            locnhieu(image, params)
-            image.jimp.getBase64(mine, (err, result) => {
-              res.json({ imageBase64Url: result })
-            })
-          })
-          break
-
-        case DOSANG:
-          ip.readBase64(imageBase64, image => {
-            dosang(image, params)
-            image.jimp.getBase64(mine, (err, result) => {
-              res.json({ imageBase64Url: result })
-            })
-          })
-          break
-
-          case TEST:
-            ip.readBase64(imageBase64, image => {
-              test(image, params)
-              image.jimp.getBase64(mine, (err, result) => {
-                res.json({ imageBase64Url: result })
-              })
-            })
-            break
 
       default:
         console.log('Command not match');

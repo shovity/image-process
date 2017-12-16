@@ -22,5 +22,6 @@ app.use('/', index)
 app.use('/api', api)
 
 server.listen(port, () => {
+	// day la mot editor co toc do nhanh kinh khung
   console.log('Server listening on ' + port)
 })

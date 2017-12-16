@@ -208,16 +208,16 @@ div[id^='mcontent'].active {
 
 /*form*/
 .lab {
-  display: inline-block;
-  width: 120px;
-  text-align: right;
+  display: block;
+  /*width: 120px;*/
+  /*text-align: right;*/
 }
 
 input {
   background: #313131;
   border: 1px solid #292929;
   border-radius: 2px;
-  margin: 5px 10px;
+  margin: 5px 0;
   padding: 0 5px;
 }
 
